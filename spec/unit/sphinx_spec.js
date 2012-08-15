@@ -29,4 +29,4 @@ vows.describe('Sphinx').addBatch({
       sphinx.stop();
     }
   }
-}).run();
+}).export(module);

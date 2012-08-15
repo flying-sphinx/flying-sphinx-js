@@ -30,4 +30,4 @@ vows.describe('Index').addBatch({
       index.run();
     }
   }
-}).run();
+}).export(module);

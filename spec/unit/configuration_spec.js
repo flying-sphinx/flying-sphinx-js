@@ -65,4 +65,4 @@ vows.describe('Configuration').addBatch({
       configuration.upload_settings_from_file('wordforms', '/path/to/foo.txt')
     }
   }
-}).run();
+}).export(module);

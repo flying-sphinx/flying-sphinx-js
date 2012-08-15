@@ -105,4 +105,4 @@ vows.describe('API').addBatch({
       });
     }
   }
-}).run();
+}).export(module);
