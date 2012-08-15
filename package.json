@@ -11,5 +11,6 @@
   },
   "bin":          {"flyingsphinx": "bin/flyingsphinx.js"},
   "dependencies": {"request": "*"},
-  "engines":      {"node": "*"}
+  "engines":      {"node": "*"},
+  "scripts":      {"test": "vows --spec"}
 }
