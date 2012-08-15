@@ -1,0 +1,5 @@
+h1. Flying Sphinx Client for Node.js
+
+!https://secure.travis-ci.org/flying-sphinx/flying-sphinx-js.png?branch=master(Build Status)!:http://travis-ci.org/flying-sphinx/flying-sphinx-js
+
+More details coming soon.
