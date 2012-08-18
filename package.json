@@ -1,6 +1,6 @@
 {
   "name":         "flying-sphinx",
-  "version":      "0.0.1",
+  "version":      "0.1.0",
   "description":  "Flying Sphinx client for Node.js",
   "main":         "lib/flyingSphinx.js",
   "author":       "Pat Allan",
