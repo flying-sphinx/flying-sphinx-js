@@ -30,7 +30,7 @@ vows.describe('Configuration').addBatch({
         assert.equal(body.configuration, 'provided content');
       });
 
-      configuration.upload_from_file('/path/to/file');
+      configuration.uploadFromFile('/path/to/file');
     }
   },
 
@@ -47,7 +47,7 @@ vows.describe('Configuration').addBatch({
         });
       });
 
-      configuration.upload_settings('wordforms', 'foo.txt', 'contents')
+      configuration.uploadSettings('wordforms', 'foo.txt', 'contents')
     },
 
     'can upload directly from a file': function(configuration) {
@@ -62,7 +62,7 @@ vows.describe('Configuration').addBatch({
         });
       });
 
-      configuration.upload_settings_from_file('wordforms', '/path/to/foo.txt')
+      configuration.uploadSettingsFromFile('wordforms', '/path/to/foo.txt')
     }
   }
 }).export(module);
