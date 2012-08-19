@@ -22,7 +22,7 @@ h3. Configuration
 
 To get your Sphinx configuration file loaded, you'll need send the file through to Flying Sphinx. This can be done from the command line via Heroku:
 
-<pre><code>$ heroku run flyingsphinx configure /path/to/sphinx.conf</code></pre>
+<pre><code>$ heroku run flying-sphinx configure /path/to/sphinx.conf</code></pre>
 
 If you have additional configuration files (such as wordforms, stopwords or exceptions), or want to generate your configuration file dynamically, then you can use the following commands through Javascript:
 
@@ -41,11 +41,11 @@ h3. Processing Indices
 
 Now that Flying Sphinx is aware of your Sphinx configuration, you'll want to get Sphinx processing your data. This can be done over the command line as well:
 
-<pre><code>$ heroku run flyingsphinx index</code></pre>
+<pre><code>$ heroku run flying-sphinx index</code></pre>
 
 If you want to process specific indices, just specify them as arguments:
 
-<pre><code>$ heroku run flyingsphinx index article user</code></pre>
+<pre><code>$ heroku run flying-sphinx index article user</code></pre>
 
 This can also be done through code if necessary:
 
@@ -58,8 +58,8 @@ h3. Controlling the Daemon
 
 Again, easy via either the command line or through code:
 
-<pre><code>$ heroku run flyingsphinx start
-$ heroku run flyingsphinx stop</code></pre>
+<pre><code>$ heroku run flying-sphinx start
+$ heroku run flying-sphinx stop</code></pre>
 
 <pre><code>var flyingSphinx = require('flyingSphinx');
 flyingSphinx.sphinx().start();
@@ -71,8 +71,8 @@ h3. Convenience Commands
 
 Via the command line, you can also use the @restart@ command (to stop and then start the Sphinx daemon) and the @rebuild@ command (to stop the daemon, process indices, then start the daemon back up).
 
-<pre><code>$ heroku run flyingsphinx restart
-$ heroku run flyingsphinx rebuild</code></pre>
+<pre><code>$ heroku run flying-sphinx restart
+$ heroku run flying-sphinx rebuild</code></pre>
 
 h2. Compatibility and Limitations
 
