@@ -19,7 +19,7 @@ vows.describe('API').addBatch({
         assert.deepEqual(options.headers, {
           'Accept':                  'application/vnd.flying-sphinx-v3+json',
           'X-Flying-Sphinx-Token':   'abc:123',
-          'X-Flying-Sphinx-Version': version + '+json'
+          'X-Flying-Sphinx-Version': version + '+js'
         });
       });
 
@@ -59,7 +59,7 @@ vows.describe('API').addBatch({
         assert.deepEqual(options.headers, {
           'Accept':                  'application/vnd.flying-sphinx-v3+json',
           'X-Flying-Sphinx-Token':   'abc:123',
-          'X-Flying-Sphinx-Version': version + '+json'
+          'X-Flying-Sphinx-Version': version + '+js'
         });
       });
 
@@ -88,7 +88,7 @@ vows.describe('API').addBatch({
         assert.deepEqual(options.headers, {
           'Accept':                  'application/vnd.flying-sphinx-v3+json',
           'X-Flying-Sphinx-Token':   'abc:123',
-          'X-Flying-Sphinx-Version': version + '+json'
+          'X-Flying-Sphinx-Version': version + '+js'
         });
       });
 
