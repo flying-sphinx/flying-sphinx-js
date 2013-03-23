@@ -30,7 +30,7 @@ If you have additional configuration files (such as wordforms, stopwords or exce
 var configuration = flyingSphinx.configuration();
 
 configuration.upload('raw configuration');
-configuration.uploadFile('/absolute/path/to/a/sphinx.conf');
+configuration.uploadFromFile('/absolute/path/to/a/sphinx.conf');
 
 configuration.uploadSettings('wordforms', 'wordforms.txt', 'file contents');
 configuration.uploadSettingsFromFile('wordforms', '/path/to/wordforms.txt');</code></pre>
