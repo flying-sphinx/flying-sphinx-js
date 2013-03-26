@@ -15,6 +15,7 @@ vows.describe('Configuration').addBatch({
       gently.expect(api, 'put', function(path, body) {
         assert.equal(path, '/');
         assert.equal(body.configuration, 'provided content');
+        assert.equal(body.sphinx_version, '2.0.6');
       });
 
       configuration.upload('provided content');
