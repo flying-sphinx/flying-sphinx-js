@@ -17,7 +17,8 @@
     "flying-sphinx": "bin/flyingsphinx.js"
   },
   "dependencies": {
-    "request": "*"
+    "request": "*",
+    "ws": "^7.1.0"
   },
   "devDependencies": {
     "vows": "*",
