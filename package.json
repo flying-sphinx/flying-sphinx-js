@@ -1,6 +1,6 @@
 {
   "name": "flying-sphinx",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Flying Sphinx client for Node.js",
   "main": "lib/flyingSphinx.js",
