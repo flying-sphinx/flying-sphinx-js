@@ -1,17 +1,35 @@
 {
-  "name":         "flying-sphinx",
-  "version":      "0.2.3",
-  "description":  "Flying Sphinx client for Node.js",
-  "main":         "lib/flyingSphinx.js",
-  "author":       "Pat Allan",
-  "keywords":     ["sphinx", "heroku"],
-  "repository":   {
+  "name": "flying-sphinx",
+  "version": "0.2.3",
+  "license": "MIT",
+  "description": "Flying Sphinx client for Node.js",
+  "main": "lib/flyingSphinx.js",
+  "author": "Pat Allan",
+  "keywords": [
+    "sphinx",
+    "heroku"
+  ],
+  "repository": {
     "type": "git",
-    "url":  "https://github.com/flying-sphinx/flying-sphinx-js.git"
+    "url": "https://github.com/flying-sphinx/flying-sphinx-js.git"
   },
-  "bin":          {"flying-sphinx": "bin/flyingsphinx.js"},
-  "dependencies": {"request": "*"},
-  "devDependencies": {"vows": "*", "gently": "*"},
-  "engines":      {"node": "*"},
-  "scripts":      {"test": "./node_modules/vows/bin/vows --spec"}
+  "bin": {
+    "flying-sphinx": "bin/flyingsphinx.js"
+  },
+  "dependencies": {
+    "archiver": "^3.0.0",
+    "request": "*",
+    "ws": "^7.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "mock-socket": "^8.0.5",
+    "nock": "^10.0.6"
+  },
+  "engines": {
+    "node": ">= 6.4.0"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --recursive \"test/**/*_test.js\""
+  }
 }
