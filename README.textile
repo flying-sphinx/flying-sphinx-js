@@ -24,16 +24,32 @@ To get your Sphinx configuration file loaded, you'll need send the file through 
 
 <pre><code>$ heroku run flying-sphinx configure /path/to/sphinx.conf</code></pre>
 
-If you have additional configuration files (such as wordforms, stopwords or exceptions), or want to generate your configuration file dynamically, then you can use the following commands through Javascript:
+If you have additional configuration files (such as wordforms, stopwords or exceptions), want to set a specific version/engine of Sphinx, or want to generate your configuration file dynamically, then you can use the following commands through Javascript:
 
 <pre><code>var flyingSphinx = require('flyingSphinx');
 var configuration = flyingSphinx.configuration();
 
-configuration.upload('raw configuration');
-configuration.uploadFromFile('/absolute/path/to/a/sphinx.conf');
+// first argument can one of two options:
+// * 'configure' - updates the configuration only.
+// * 'rebuild'   - stops the daemon, updates the configuration, re-indexes, and
+//                 starts the daemon up again.
+configuration.process('configure', function(configurer) {
+  // Upload Sphinx configuration
+  configurer.addConfiguration('indexer { }');
 
-configuration.uploadSettings('wordforms', 'wordforms.txt', 'file contents');
-configuration.uploadSettingsFromFile('wordforms', '/path/to/wordforms.txt');</code></pre>
+  // Can be 'sphinx' or 'manticore'
+  configurer.addEngine('sphinx');
+
+  // For Sphinx, you should use 2.2.11 or newer.
+  // For Manticore, you should use 2.7.5 or newer.
+  // The supported versions are listed here:
+  // http://support.flying-sphinx.com/kb/configuration/setting-your-sphinx-version
+  configurer.addVersion('2.2.11')
+
+  // For setting files, specify the setting, the name of the file, and
+  // the contents of the file.
+  configurer.addSettingFile('wordforms', 'wordforms.txt', 'file contents');
+});</code></pre>
 
 Make sure any settings file names match what you've set in your configuration file, but don't stress about paths - Flying Sphinx will set them up for you. Settings files must be unique per setting - if you refer to @a.txt@ for wordforms in more than one place, it'll be a single file, not scoped to index.
 
@@ -63,7 +79,8 @@ $ heroku run flying-sphinx stop</code></pre>
 
 <pre><code>var flyingSphinx = require('flyingSphinx');
 flyingSphinx.sphinx().start();
-flyingSphinx.sphinx().stop();</code></pre>
+flyingSphinx.sphinx().stop();
+flyingSphinx.sphinx().restart();</code></pre>
 
 Both of the javascript methods are asynchronous and can take an optional callback function as an argument.
 
@@ -74,13 +91,17 @@ Via the command line, you can also use the @restart@ command (to stop and then s
 <pre><code>$ heroku run flying-sphinx restart
 $ heroku run flying-sphinx rebuild</code></pre>
 
+You can also supply a file path to a configuration file for the rebuild argument:
+
+<pre><code>$ heroku run flying-sphinx rebuild /path/to/sphinx.conf</code></pre>
+
 h2. Compatibility and Limitations
 
-This library has been built and tested against Node 0.8, but I will happily accept patches for other versions of Node if necessary.
+This library is currently built and tested against Node v8/v10/v11/v12. If you are using an older version of Node, please use the v0.2.3 release of this library.
 
 h2. Contributing
 
-Patches are indeed welcome (especially given Node.js is not a framework I'm familiar with at the moment). flying-sphinx.com API documentation will be provided at some point in the future, but generally keep in mind the following:
+Patches are indeed welcome. The flying-sphinx.com API documentation will be provided at some point in the future, but generally keep in mind the following:
 
 * The environment is managed via npm.
 * Please use the test frameworks as shown by the existing tests - and do write tests.
@@ -89,4 +110,4 @@ Patches are indeed welcome (especially given Node.js is not a framework I'm fami
 
 h2. Licence
 
-Copyright &copy; 2012 Pat Allan, released under an MIT licence.
+Copyright &copy; 2012-2019 Pat Allan, released under an MIT licence.
