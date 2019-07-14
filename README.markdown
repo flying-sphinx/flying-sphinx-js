@@ -1,6 +1,6 @@
 # Flying Sphinx Client for Node.js
 
-[![Build Status](https://travis-ci.org/flying-sphinx/flying-sphinx-js.png?branch=master)](https://travis-ci.org/flying-sphinx/flying-sphinx-js)
+[![Build Status](https://travis-ci.org/flying-sphinx/flying-sphinx-js.svg?branch=master)](https://travis-ci.org/flying-sphinx/flying-sphinx-js)
 
 This is a Node.js client for [flying-sphinx.com](https://flying-sphinx.com).
 
