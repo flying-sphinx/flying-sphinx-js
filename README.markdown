@@ -1,32 +1,37 @@
-h1. Flying Sphinx Client for Node.js
+# Flying Sphinx Client for Node.js
 
-!https://secure.travis-ci.org/flying-sphinx/flying-sphinx-js.png?branch=master(Build Status)!:http://travis-ci.org/flying-sphinx/flying-sphinx-js
+[![Build Status](https://travis-ci.org/flying-sphinx/flying-sphinx-js.png?branch=master)](https://travis-ci.org/flying-sphinx/flying-sphinx-js)
 
-This is a Node.js client for "flying-sphinx.com":https://flying-sphinx.com (initially just as a Heroku add-on, but support for other platforms will be added in the future). Consider it a beta at the moment: the functionality's there, though you may need to read the source a little.
+This is a Node.js client for [flying-sphinx.com](https://flying-sphinx.com).
 
-Please note that this is not a client for Sphinx itself. Check out "sphinxapi":https://github.com/lindory-project/node-sphinxapi or "limestone":https://github.com/kurokikaze/limestone for talking to Sphinx itself.
+Please note that this is not a client for Sphinx itself. Check out [sphinxapi](https://github.com/lindory-project/node-sphinxapi) or [limestone](https://github.com/kurokikaze/limestone) for talking to Sphinx itself.
 
-h2. Installation
+## Installation
 
-The @flying-sphinx@ package is available via npm:
+The `flying-sphinx` package is available via npm:
 
-<pre><code>npm install flying-sphinx</code></pre>
+```
+npm install flying-sphinx
+```
 
-h2. Usage
+## Usage
 
 If you're not familiar with Sphinx, then this isn't the place to start... but once you understand how Sphinx works, there's a few key areas to interact with Flying Sphinx: configuration of Sphinx, processing the indices, and starting up and stopping the daemon.
 
-Authentication credentials are sourced from the environment (FLYING_SPHINX_IDENTIFIER and FLYING_SPHINX_API_KEY) - and these are automatically available through Heroku. If for some reason you wish to run commands locally, then you'll need to make sure those two settings are in place.
+Authentication credentials are sourced from the environment (`FLYING_SPHINX_IDENTIFIER` and `FLYING_SPHINX_API_KEY`) - and these are automatically available through Heroku. If for some reason you wish to run commands locally, then you'll need to make sure those two settings are in place.
 
-h3. Configuration
+### Configuration
 
 To get your Sphinx configuration file loaded, you'll need send the file through to Flying Sphinx. This can be done from the command line via Heroku:
 
-<pre><code>$ heroku run flying-sphinx configure /path/to/sphinx.conf</code></pre>
+```
+$ heroku run flying-sphinx configure /path/to/sphinx.conf
+```
 
 If you have additional configuration files (such as wordforms, stopwords or exceptions), want to set a specific version/engine of Sphinx, or want to generate your configuration file dynamically, then you can use the following commands through Javascript:
 
-<pre><code>var flyingSphinx = require('flyingSphinx');
+```js
+var flyingSphinx = require('flyingSphinx');
 var configuration = flyingSphinx.configuration();
 
 // first argument can one of two options:
@@ -49,57 +54,72 @@ configuration.process('configure', function(configurer) {
   // For setting files, specify the setting, the name of the file, and
   // the contents of the file.
   configurer.addSettingFile('wordforms', 'wordforms.txt', 'file contents');
-});</code></pre>
+});
+```
 
 Make sure any settings file names match what you've set in your configuration file, but don't stress about paths - Flying Sphinx will set them up for you. Settings files must be unique per setting - if you refer to @a.txt@ for wordforms in more than one place, it'll be a single file, not scoped to index.
 
-h3. Processing Indices
+### Processing Indices
 
 Now that Flying Sphinx is aware of your Sphinx configuration, you'll want to get Sphinx processing your data. This can be done over the command line as well:
 
-<pre><code>$ heroku run flying-sphinx index</code></pre>
+```
+$ heroku run flying-sphinx index
+```
 
 If you want to process specific indices, just specify them as arguments:
 
-<pre><code>$ heroku run flying-sphinx index article user</code></pre>
+```
+$ heroku run flying-sphinx index article user
+```
 
 This can also be done through code if necessary:
 
-<pre><code>var flyingSphinx = require('flyingSphinx');
-flyingSphinx.index().run();</code></pre>
+```js
+var flyingSphinx = require('flyingSphinx');
+flyingSphinx.index().run();
+```
 
-@run@ can take two arguments, the first being an array of index names, the second being a callback function to run with the resulting log. They're both optional, but if you just want a callback, specify an empty array for the first argument.
+`run` can take two arguments, the first being an array of index names, the second being a callback function to run with the resulting log. They're both optional, but if you just want a callback, specify an empty array for the first argument.
 
-h3. Controlling the Daemon
+### Controlling the Daemon
 
 Again, easy via either the command line or through code:
 
-<pre><code>$ heroku run flying-sphinx start
-$ heroku run flying-sphinx stop</code></pre>
+```
+$ heroku run flying-sphinx start
+$ heroku run flying-sphinx stop
+```
 
-<pre><code>var flyingSphinx = require('flyingSphinx');
+```js
+var flyingSphinx = require('flyingSphinx');
 flyingSphinx.sphinx().start();
 flyingSphinx.sphinx().stop();
-flyingSphinx.sphinx().restart();</code></pre>
+flyingSphinx.sphinx().restart();
+```
 
 Both of the javascript methods are asynchronous and can take an optional callback function as an argument.
 
-h3. Convenience Commands
+### Convenience Commands
 
-Via the command line, you can also use the @restart@ command (to stop and then start the Sphinx daemon) and the @rebuild@ command (to stop the daemon, process indices, then start the daemon back up).
+Via the command line, you can also use the `restart` command (to stop and then start the Sphinx daemon) and the `rebuild` command (to stop the daemon, process indices, then start the daemon back up).
 
-<pre><code>$ heroku run flying-sphinx restart
-$ heroku run flying-sphinx rebuild</code></pre>
+```
+$ heroku run flying-sphinx restart
+$ heroku run flying-sphinx rebuild
+```
 
 You can also supply a file path to a configuration file for the rebuild argument:
 
-<pre><code>$ heroku run flying-sphinx rebuild /path/to/sphinx.conf</code></pre>
+```
+$ heroku run flying-sphinx rebuild /path/to/sphinx.conf
+```
 
-h2. Compatibility and Limitations
+## Compatibility and Limitations
 
 This library is currently built and tested against Node v8/v10/v11/v12. If you are using an older version of Node, please use the v0.2.3 release of this library.
 
-h2. Contributing
+## Contributing
 
 Patches are indeed welcome. The flying-sphinx.com API documentation will be provided at some point in the future, but generally keep in mind the following:
 
@@ -108,6 +128,6 @@ Patches are indeed welcome. The flying-sphinx.com API documentation will be prov
 * Keep your commits in a separate branch.
 * Don't mess around with the version number in your branch - this keeps merges easier for me to manage.
 
-h2. Licence
+## Licence
 
 Copyright &copy; 2012-2019 Pat Allan, released under an MIT licence.
