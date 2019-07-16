@@ -31,7 +31,7 @@ $ heroku run flying-sphinx configure /path/to/sphinx.conf
 If you have additional configuration files (such as wordforms, stopwords or exceptions), want to set a specific version/engine of Sphinx, or want to generate your configuration file dynamically, then you can use the following commands through Javascript:
 
 ```js
-var flyingSphinx = require('flyingSphinx');
+var flyingSphinx = require('flying-sphinx');
 var configuration = flyingSphinx.configuration();
 
 // first argument can one of two options:
