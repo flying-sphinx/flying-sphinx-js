@@ -132,4 +132,32 @@ describe('Configuring', function() {
       });
     });
   });
+
+  describe('with both settings and configuration', function() {
+    it('should run through on success', function(done) {
+      var server = new MockServer();
+      var mockAPI = new MockAPI('0123456789abc', 'completion', server);
+      mockAPI.register();
+
+      nock('https://flying-sphinx.com')
+        .get('/api/my/v5/presignature')
+        .reply(200, {
+          url: 'https://aws.amazon.com',
+          path: '/foo/bar.tar.gz',
+          fields: {},
+          status: 'OK'
+        });
+
+      nock('https://aws.amazon.com').post('/').reply(200, {});
+
+      configuration.process('configure', function(configurer) {
+        configurer.addConfiguration('indexer { }');
+
+        configurer.addEngine('sphinx');
+        configurer.addVersion('2.2.11')
+
+        configurer.addSettingFile('wordforms', 'wordforms.txt', 'file contents');
+      }, function() { server.close(done); });
+    });
+  })
 });
